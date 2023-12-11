@@ -33,7 +33,7 @@ def main():
     noise_level_img         = 12.75/255.0       # set AWGN noise level for LR image, default: 0
     noise_level_model       = noise_level_img   # set noise level of model, default: 0
     model_name              = 'diffusion_ffhq_10m'  # diffusion_ffhq_10m, 256x256_diffusion_uncond; set diffusino model
-    testset_name            = 'demo_test'    # set testing set,  'imagenet_val' | 'ffhq_val'
+    testset_name            = 'raindrops'    # set testing set,  'imagenet_val' | 'ffhq_val'
     num_train_timesteps     = 1000
     iter_num                = 100                # set number of sampling iterations
     iter_num_U              = 1                 # set number of inner iterations, default: 1
@@ -191,6 +191,7 @@ def main():
 
                     img_name, ext = os.path.splitext(os.path.basename(img))
                     img_H = util.imread_uint(img, n_channels=n_channels)
+                    img_H = util.center_crop_arr(img_H, 256)
                     img_H = util.modcrop(img_H, sf)  # modcrop
 
                     if sr_mode == 'blur':
